@@ -38,7 +38,6 @@ class PostRegistration:
     def POST(self):
         data = web.input()
         print("Data: ", data)
-        data = {"username": "test1", "password": "password1"}
         reg_model = RegisterModel()
         reg_model.insert_user(data)
 
