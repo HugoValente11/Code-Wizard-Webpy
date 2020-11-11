@@ -22,8 +22,8 @@ $(document).ready(function(e) {
         });
     });
 
-    $(document).on("submit", '#login-form', function(e) {
-    e.preventDefault();
+    $("#login-form").submit(function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
     var form = $(this).serialize();
     console.log("Variable form: ", form);
         $.ajax({
@@ -31,11 +31,7 @@ $(document).ready(function(e) {
             type: "POST",
             data: form,
             success: function(response) {
-                if (response == "error") {
-                    alert("Could not login");
-                } else {
-                    console.log("Logged in as: ", response);
-                }
+                console.log(response) // show response from the php script.
         }
         });
     });

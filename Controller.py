@@ -52,7 +52,7 @@ class CheckLogin:
         isCorrect = login_model.check_login(data)
         if isCorrect:
             return isCorrect
-        return "error"
+        return "hello negative"
 
 
 if __name__ == "__main__":
