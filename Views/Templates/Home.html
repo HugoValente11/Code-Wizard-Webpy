@@ -1,3 +1,7 @@
 <div class="container">
-    <h1>Code Wizard</h1>
+
+    $if session['user'] == 'none':
+        <h1>Hello Code Wizard</h1>
+    $else:
+        <h1>Code Wizard: $session</h1>
 </div>

@@ -25,7 +25,12 @@ $(document).ready(function(e) {
             type: "POST",
             data: form,
             success: function(response) {
-                console.log(response) // show response from the php script.
+                if (response == "error") {
+                    alert("Could not login.")
+                } else {
+                    console.log("Logged in successfully", response);
+                    // window.location.href = '/'
+                }
         }
         });
     });

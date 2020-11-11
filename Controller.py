@@ -16,8 +16,12 @@ urls = (
         '/check-login', 'CheckLogin'
         )
 
-render = web.template.render("Views/Templates", base="MainLayout")
 app = web.application(urls, globals())
+session = web.session.Session(app, web.session.DiskStore("sessions"), initializer={'user': 'none'})
+session_data = session._initializer
+
+render = web.template.render("Views/Templates", base="MainLayout", globals={'session': session_data, 'current_user': session_data['user']})
+
 
 
 class Home:
@@ -43,6 +47,7 @@ class PostRegistration:
 
         return data["username"]
 
+
 class CheckLogin:
     def POST(self):
         data = web.input()
@@ -50,8 +55,10 @@ class CheckLogin:
         login_model = LoginModel()
         isCorrect = login_model.check_login(data)
         if isCorrect:
+            session_data['user'] = isCorrect
             return isCorrect
-        return "hello negative"
+
+        return "error"
 
 
 if __name__ == "__main__":
