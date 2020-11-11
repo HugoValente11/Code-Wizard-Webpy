@@ -3,5 +3,5 @@
     $if session['user'] == 'none':
         <h1>Hello Code Wizard</h1>
     $else:
-        <h1>Code Wizard: $session</h1>
+        <h1>Code Wizard: $session['user']['name']</h1>
 </div>

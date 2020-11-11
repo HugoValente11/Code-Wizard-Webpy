@@ -29,7 +29,7 @@ $(document).ready(function(e) {
                     alert("Could not login.")
                 } else {
                     console.log("Logged in successfully", response);
-                    // window.location.href = '/'
+                    window.location.href = '/';
                 }
         }
         });

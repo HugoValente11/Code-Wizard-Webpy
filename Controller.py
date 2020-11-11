@@ -13,7 +13,8 @@ urls = (
         '/register', 'Register',
         '/postregistration', 'PostRegistration',
         '/login', 'Login',
-        '/check-login', 'CheckLogin'
+        '/check-login', 'CheckLogin',
+        '/logout', 'Logout'
         )
 
 app = web.application(urls, globals())
@@ -59,6 +60,12 @@ class CheckLogin:
             return isCorrect
 
         return "error"
+
+
+class Logout:
+    def GET(self):
+        session.kill()
+        return "success"
 
 
 if __name__ == "__main__":
