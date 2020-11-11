@@ -26,7 +26,7 @@ $(document).ready(function(e) {
             data: form,
             success: function(response) {
                 if (response == "error") {
-                    alert("Could not login.")
+                    alert("Could not login.");
                 } else {
                     console.log("Logged in successfully", response);
                     window.location.href = '/';
@@ -34,4 +34,20 @@ $(document).ready(function(e) {
         }
         });
     });
+
+    $("#logout-link").on('click', function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+        $.ajax({
+            url: "/logout",
+            type: "GET",
+            success: function(response) {
+                if (response == "success") {
+                    window.location.href = 'login';
+                } else {
+                    alert("Could not login.");
+                }
+        }
+        });
+    });
+
 });
