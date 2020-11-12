@@ -58,7 +58,13 @@ class Login:
 
 class Settings:
     def GET(self):
-        return render.Settings()
+        data = {'username': 'admin', 'password': 'admin'}
+        login_model = LoginModel()
+        isCorrect = login_model.check_login(data)
+        if isCorrect:
+            session_data['user'] = isCorrect
+
+        return render.Settings(session_data)
 
 
 class PostRegistration:
@@ -103,13 +109,6 @@ class PostActivity:
 
 class UpdateSettings:
     def POST(self):
-        data = {'username': 'admin', 'password': 'admin'}
-
-        login_model = LoginModel()
-        isCorrect = login_model.check_login(data)
-        if isCorrect:
-            session_data['user'] = isCorrect
-
         data = web.input()
         data['username'] = session_data['user']['username']
 
