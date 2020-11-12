@@ -19,7 +19,7 @@ urls = (
         '/logout', 'Logout',
         '/post-activity', 'PostActivity',
         '/profile/(.*)/info', 'UserInfo',
-        '/settings', 'Settings',
+        '/settings', 'UserSettings',
         '/profile/(.*)', 'UserProfile',
         '/update-settings', 'UpdateSettings'
         )
@@ -56,7 +56,7 @@ class Login:
         return render.Login()
 
 
-class Settings:
+class UserSettings:
     def GET(self):
         data = {'username': 'admin', 'password': 'admin'}
         login_model = LoginModel()
@@ -118,6 +118,24 @@ class UpdateSettings:
         return "An error has occured"
 
 
+class UserInfo:
+    def GET(self, user):
+        login_model = LoginModel()
+        user_info = login_model.get_profile(user)
+        return render.Info(user_info)
+
+
+class UserProfile:
+    def GET(self, user):
+        login_model = LoginModel()
+        user_info = login_model.get_profile(user)
+
+        post_model = PostModel()
+        posts = post_model.get_user_posts(user_info)
+
+        print("U info:", user_info)
+
+        return render.Profile(posts, user_info)
 
 
 

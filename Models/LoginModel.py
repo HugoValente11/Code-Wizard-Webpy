@@ -26,3 +26,7 @@ class LoginModel:
     def update_info(self, data):
         self.Users.update_one({'username': data['username']}, {"$set": data})
         return True
+
+    def get_profile(self, user):
+        user_info = self.Users.find_one({'username': user})
+        return user_info
