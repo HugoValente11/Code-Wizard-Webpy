@@ -35,6 +35,44 @@ $(document).ready(function(e) {
         });
     });
 
+    $("#post-activity").submit(function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var form = $(this).serialize();
+    console.log("Variable form: ", form);
+        $.ajax({
+            url: "/post-activity",
+            type: "POST",
+            data: form,
+            success: function(response) {
+                if (response == "error") {
+                    alert("Could not login.");
+                } else {
+                    console.log("Logged in successfully", response);
+                    window.location.href = '/';
+                }
+        }
+        });
+    });
+
+    $("#settings-form").submit(function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var form = $(this).serialize();
+    console.log("Variable form: ", form);
+        $.ajax({
+            url: "/update-settings",
+            type: "POST",
+            data: form,
+            success: function(response) {
+                if (response == "error") {
+                    alert("Could not update.");
+                } else {
+                    console.log("Updated", response);
+                    window.location.href = window.location.href;
+                }
+        }
+        });
+    });
+
     $("#logout-link").on('click', function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
         $.ajax({

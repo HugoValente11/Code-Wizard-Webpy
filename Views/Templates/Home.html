@@ -1,7 +1,29 @@
+$def with (posts)
+
 <div class="container">
 
     $if session['user'] == None:
         <h1>Hello Code Wizard</h1>
     $else:
         <h1>Code Wizard: $session['user']['name']</h1>
+
+
+    <div class="post-box">
+        <form id="post-activity">
+            <textarea name="content" class="post-input" placeholder="What's new, $session['user']['name']"></textarea>
+            <button id="post-button" class="btn btn-info btn-raised waves-effect" type="submit"><span class="mdi mdi-send"></span>>Post</button>
+        </form>
+    </div>
+
+    $for post in posts:
+        <div class="post-card">
+            <div class="header">
+                <div class="avatar"></div>
+                <a href="/profile">$post['username']</a>
+            </div>
+            <div class="content">
+                $post['content']
+            </div>
+        </div>
+
 </div>
