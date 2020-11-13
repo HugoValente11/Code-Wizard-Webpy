@@ -19,7 +19,8 @@ $def with (posts)
         <div class="post-card">
             <div class="header">
                 <div class="avatar"></div>
-                <a href="/profile">$post['username']</a>
+                <a href="/profile/$post['username']">$post['username']</a>
+                <span class="timestamp">$post['timestamp']</span>
             </div>
             <div class="content">
                 $post['content']
