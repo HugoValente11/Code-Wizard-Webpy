@@ -21,7 +21,8 @@ urls = (
         '/profile/(.*)/info', 'UserInfo',
         '/settings', 'UserSettings',
         '/profile/(.*)', 'UserProfile',
-        '/update-settings', 'UpdateSettings'
+        '/update-settings', 'UpdateSettings',
+        '/submit-comment', 'SubmitComment'
         )
 
 app = web.application(urls, globals())
@@ -42,7 +43,8 @@ class Home:
 
         postsModel = PostModel()
         new_posts = postsModel.get_all_posts()
-
+        for post in new_posts:
+            print("Post: ", post)
         return render.Home(new_posts)
 
 
@@ -136,6 +138,19 @@ class UserProfile:
         print("U info:", user_info)
 
         return render.Profile(posts, user_info)
+
+
+class SubmitComment:
+    def POST(self):
+        data = web.input()
+        data['username'] = session_data['user']['username']
+        print("Data: ", data)
+
+        post_model = PostModel()
+        added_comment = post_model.add_comment(data)
+        if added_comment:
+            return "success"
+        return "error"
 
 
 

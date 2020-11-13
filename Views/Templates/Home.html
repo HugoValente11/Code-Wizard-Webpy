@@ -31,9 +31,31 @@ $def with (posts)
                 <button class="btn btn-round waves-effect btn-default btn-raised btn-comment"><span class="mdi mdi-comment-text-outline"></span></button>
 
                 <button class="btn btn-round waves-effect btn-default btn-raised btn-share"><span class="mdi mdi-share"></span></button>
-
-
             </div>
-        </div>
 
+            <div class="comments">
+
+                $for comment in post['comments']:
+                    <div class="comment">
+                        <div class="headers">
+                            <div class="avatar"></div>
+                                <span class="comment-timestamp pull-right">Posted $comment['timestamp']</span>
+                                <a href="/profile/comment['username']">$comment['username']</a><br/>
+                                <span class="comment-content">$comment['content']</span>
+                            </div>
+                    </div>
+
+                <div class="comment_add">
+                    <div class="headers">
+                        <div class="avatar"></div>
+                            <form id ="comment-form" name="comment-form" class="comment-form">
+                                <input name="post_id" class="hidden" value="$post['_id']"/>
+                                <textarea name="comment-text" class="form-control" placeholder="Write a comment"></textarea>
+                                <button type="submit" class="btn btn-info btn-raised waves-effect btn-sm pull-right">Add comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
 </div>
+

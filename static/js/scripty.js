@@ -54,6 +54,19 @@ $(document).ready(function(e) {
         });
     });
 
+    $("#comment-form").submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type : "POST",
+                    url : "/submit-comment",
+                    data : $("#comment-form").serialize(),
+                    success : function(response) {
+                        console.log(response)
+                    }
+                });
+                e.preventDefault();
+            });
+
     $("#settings-form").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
     var form = $(this).serialize();
@@ -88,4 +101,6 @@ $(document).ready(function(e) {
         });
     });
 
+
 });
+

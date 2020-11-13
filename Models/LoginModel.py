@@ -15,10 +15,8 @@ class LoginModel:
         if user_object:
             # Check if pw matches by comparing hashes
             if bcrypt.checkpw(data["password"].encode(), user_object["password"]):
-                print("Code checks out")
                 return user_object
             else:
-                print("Doesn't check out")
                 return False
         else:
             False
