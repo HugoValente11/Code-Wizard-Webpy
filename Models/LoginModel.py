@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import bcrypt
 
+
 class LoginModel:
     def __init__(self):
         self.client = MongoClient()
@@ -28,3 +29,12 @@ class LoginModel:
     def get_profile(self, user):
         user_info = self.Users.find_one({'username': user})
         return user_info
+
+    def update_image(self, data):
+        type = data['type']
+        print("Type: ", type)
+        print("Type: ", data)
+        print("Type: ", data['img'])
+
+        updated_image = self.Users.update_one({'username': data['username']}, {"$set": {data['type']: data['img']}})
+        return updated_image

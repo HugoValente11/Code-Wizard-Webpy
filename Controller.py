@@ -8,6 +8,7 @@ import web
 from Models.RegisterModel import RegisterModel
 from Models.LoginModel import LoginModel
 from Models.PostModel import PostModel
+import os
 web.config.debug = False
 
 urls = (
@@ -22,7 +23,8 @@ urls = (
         '/settings', 'UserSettings',
         '/profile/(.*)', 'UserProfile',
         '/update-settings', 'UpdateSettings',
-        '/submit-comment', 'SubmitComment'
+        '/submit-comment', 'SubmitComment',
+        '/upload-image/(.*)', 'UploadImage'
         )
 
 app = web.application(urls, globals())
@@ -151,6 +153,36 @@ class SubmitComment:
         if added_comment:
             return "success"
         return "error"
+
+
+class UploadImage:
+    def POST(self, type):
+        file = web.input(avatar= {}, background= {})
+        file_dir = '/static/uploads/' + session_data['user']['username']
+        file_dir = file_dir.replace('\\', '/')
+        print("File type: ", file[type])
+
+        if not os.path.isdir(file_dir):
+            os.makedirs(file_dir)
+
+        if "avatar" or "background" in file:
+            filepath = file[type].filename.replace('\\', '/')
+            filename = filepath.split('/')[-1]
+            f = open(file_dir + '/' + filename, 'wb')
+            f.write(file.avatar.file.read())
+            print(f.write(file.avatar.file.read()))
+            f.close()
+
+            update = {}
+            update['type'] = type
+            update['img'] = '/static/uploads/' + session_data['user']['username'] + '/' + filename
+            update['username'] = session_data['user']['username']
+
+            account_model = LoginModel()
+            added_image = account_model.update_image(update)
+
+        raise web.seeother('/settings')
+
 
 
 

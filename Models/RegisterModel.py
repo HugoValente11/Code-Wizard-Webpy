@@ -15,6 +15,7 @@ class RegisterModel:
 
         # Insert object in Database
         id = self.Users.insert({"username": data["username"], "name": data["fullname"],
-                                "password": hashed_pw, "email": data["email"]})
+                                "password": hashed_pw, "email": data["email"], 'avatar': ' ',
+                                'background': ' ', 'about': ' ', 'hobbies': ' ', 'birthday': ' '})
         print(id)
         print(data["username"], data["fullname"], hashed_pw, data["email"])

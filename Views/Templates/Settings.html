@@ -1,5 +1,16 @@
 $def with (session_data)
 
+<div class="col-md-12">
+    <div class="profile-header">
+        <div class="background-image" style="background:url('static/img/background.jpg');">
+            <div class="avatar">
+                <img src="$session_data['user']['avatar']" class="profile-avatar"/>
+                <h2 class="profile-name">$session['user']['name']</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class = "post-card extra-padding">
     <form id="settings-form">
         <h2 class="post-title">Basic Info</h2>
@@ -13,4 +24,18 @@ $def with (session_data)
         <p><input name="birthday" class="form-control no-border" value="$session_data['user']['birthday']"/></p>
         <button type="submit" class="btn btn-info btn-raised waves-effect">Save</button>
     </form>
+</div>
+
+<div class = "post-card extra-padding">
+        <h2 class="post-title">Images</h2>
+        <span class="post-subtitle">Avatar</span>
+        <form id="avatar-upload" method="POST" enctype="multipart/form-data" action="/upload-image/avatar">
+            <input type="file" name="avatar" class=""/>
+            <button type="submit" class="btn btn-info btn-raised waves-effect">Save</button>
+        </form>
+        <span class="post-subtitle">Background Image</span>
+        <form id="background-upload">
+            <input type="file" name="background" class=""/>
+            <button type="submit" class="btn btn-info btn-raised waves-effect">Save</button>
+        </form>
 </div>
