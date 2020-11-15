@@ -34,7 +34,7 @@ $def with (session_data)
             <button type="submit" class="btn btn-info btn-raised waves-effect">Save</button>
         </form>
         <span class="post-subtitle">Background Image</span>
-        <form id="background-upload">
+        <form id="background-upload" method="POST" action="/upload-image/background" enctype="multipart/form-data">
             <input type="file" name="background" class=""/>
             <button type="submit" class="btn btn-info btn-raised waves-effect">Save</button>
         </form>

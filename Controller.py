@@ -161,7 +161,7 @@ class UploadImage:
         file = web.input(avatar= {}, background= {})
         file_dir = './static/uploads/' + session_data['user']['username']
         # file_dir = file_dir.replace('\\', '/')
-        print("\nFile type: \n\n", file[type])
+        print("\nFile type: \n\n", file)
 
         if not os.path.isdir(file_dir):
             os.makedirs(file_dir)
