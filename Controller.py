@@ -9,6 +9,7 @@ from Models.RegisterModel import RegisterModel
 from Models.LoginModel import LoginModel
 from Models.PostModel import PostModel
 import os
+import json
 web.config.debug = False
 
 urls = (
@@ -158,9 +159,9 @@ class SubmitComment:
 class UploadImage:
     def POST(self, type):
         file = web.input(avatar= {}, background= {})
-        file_dir = '/static/uploads/' + session_data['user']['username']
-        file_dir = file_dir.replace('\\', '/')
-        print("File type: ", file[type])
+        file_dir = './static/uploads/' + session_data['user']['username']
+        # file_dir = file_dir.replace('\\', '/')
+        print("\nFile type: \n\n", file[type])
 
         if not os.path.isdir(file_dir):
             os.makedirs(file_dir)
@@ -169,11 +170,10 @@ class UploadImage:
             filepath = file[type].filename.replace('\\', '/')
             filename = filepath.split('/')[-1]
             f = open(file_dir + '/' + filename, 'wb')
-            f.write(file.avatar.file.read())
-            print(f.write(file.avatar.file.read()))
-            f.close()
-
+            f.write(file[type].file.read())
+            f.flush()
             update = {}
+
             update['type'] = type
             update['img'] = '/static/uploads/' + session_data['user']['username'] + '/' + filename
             update['username'] = session_data['user']['username']

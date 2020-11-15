@@ -32,9 +32,6 @@ class LoginModel:
 
     def update_image(self, data):
         type = data['type']
-        print("Type: ", type)
-        print("Type: ", data)
-        print("Type: ", data['img'])
 
         updated_image = self.Users.update_one({'username': data['username']}, {"$set": {data['type']: data['img']}})
         return updated_image
