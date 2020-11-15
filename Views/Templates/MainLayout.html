@@ -19,12 +19,13 @@ $var js: https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.mi
                 <a class="navbar-brand">CodeWizard</a>
             </div>
 
-            <ul class="nav navbar-nav">
+            $if session['user'] != None:
+                <ul class="nav navbar-nav">
                 <li><a class="waves-effect" href="/">Home Feed<div class="ripple-container"></div></a></li>
-                <li><a href="/discover">Discover<div class="ripple-container"></div></a></li>
-                <li><a href="/profile/admin">Profile<div class="ripple-container"></div></a></li>
-                <li><a href="/settings">Settings<div class="ripple-container"></div></a></li>
-            </ul>
+                    <li><a href="/discover">Discover<div class="ripple-container"></div></a></li>
+                    <li><a href="/profile/$session['user']['name']">Profile<div class="ripple-container"></div></a></li>
+                    <li><a href="/settings">Settings<div class="ripple-container"></div></a></li>
+                 </ul>
         <div class="pull-right">
             $if session['user'] == None:
                 <a href="/login" class="btn btn-link">Login</a>&nbsp; &nbsp;

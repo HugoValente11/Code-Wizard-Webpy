@@ -39,8 +39,7 @@ class Home:
     def GET(self):
         postsModel = PostModel()
         new_posts = postsModel.get_all_posts()
-        for post in new_posts:
-            print("Post: ", post)
+
         return render.Home(new_posts)
 
 
@@ -56,12 +55,6 @@ class Login:
 
 class UserSettings:
     def GET(self):
-        data = {'username': 'admin', 'password': 'admin'}
-        print(data)
-        login_model = LoginModel()
-        isCorrect = login_model.check_login(data)
-        if isCorrect:
-            session_data['user'] = isCorrect
 
         return render.Settings(session_data)
 
@@ -69,7 +62,6 @@ class UserSettings:
 class PostRegistration:
     def POST(self):
         data = web.input()
-        print("Data: ", data)
         reg_model = RegisterModel()
         reg_model.insert_user(data)
 
@@ -100,7 +92,6 @@ class PostActivity:
     def POST(self):
         data = web.input()
         data['username'] = session_data['user']['username']
-        print("Data:", data)
         post_model = PostModel()
         post_model.insert_posts(data)
         return "success"
