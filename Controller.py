@@ -37,13 +37,6 @@ render = web.template.render("Views/Templates", base="MainLayout", globals={'ses
 
 class Home:
     def GET(self):
-        data = {'username': 'admin', 'password': 'admin'}
-
-        login_model = LoginModel()
-        isCorrect = login_model.check_login(data)
-        if isCorrect:
-            session_data['user'] = isCorrect
-
         postsModel = PostModel()
         new_posts = postsModel.get_all_posts()
         for post in new_posts:
@@ -64,6 +57,7 @@ class Login:
 class UserSettings:
     def GET(self):
         data = {'username': 'admin', 'password': 'admin'}
+        print(data)
         login_model = LoginModel()
         isCorrect = login_model.check_login(data)
         if isCorrect:
@@ -127,6 +121,7 @@ class UserInfo:
     def GET(self, user):
         login_model = LoginModel()
         user_info = login_model.get_profile(user)
+        print(user_info)
         return render.Info(user_info)
 
 
