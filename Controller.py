@@ -161,7 +161,7 @@ class UploadImage:
         file = web.input(avatar= {}, background= {})
         file_dir = './static/uploads/' + session_data['user']['username']
         # file_dir = file_dir.replace('\\', '/')
-        print("\nFile type: \n\n", file)
+        print("\nFile type: \n\n", type)
 
         if not os.path.isdir(file_dir):
             os.makedirs(file_dir)
@@ -169,11 +169,14 @@ class UploadImage:
         if "avatar" or "background" in file:
             filepath = file[type].filename.replace('\\', '/')
             filename = filepath.split('/')[-1]
+            extension = filename.split('.')[-1]
+            filename = type + '.' + extension
+            print("FIlename: ", filename)
             f = open(file_dir + '/' + filename, 'wb')
             f.write(file[type].file.read())
             f.flush()
-            update = {}
 
+            update = {}
             update['type'] = type
             update['img'] = '/static/uploads/' + session_data['user']['username'] + '/' + filename
             update['username'] = session_data['user']['username']
