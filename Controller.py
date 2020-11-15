@@ -9,7 +9,6 @@ from Models.RegisterModel import RegisterModel
 from Models.LoginModel import LoginModel
 from Models.PostModel import PostModel
 import os
-import json
 web.config.debug = False
 
 urls = (
@@ -123,8 +122,6 @@ class UserProfile:
 
         post_model = PostModel()
         posts = post_model.get_user_posts(user_info)
-
-        print("U info:", user_info)
 
         return render.Profile(posts, user_info)
 
