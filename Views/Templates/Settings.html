@@ -2,7 +2,8 @@ $def with (session_data)
 
 <div class="col-md-12">
     <div class="profile-header">
-        <div class="background-image" style="background:url("$session_data['user']['background']");">
+        <div class="background-image">
+            <img src="$session_data['user']['background']" class="profile-background"/>
             <div class="avatar">
                 <img src="$session_data['user']['avatar']" class="profile-avatar"/>
                 <h2 class="profile-name">$session['user']['name']</h2>
