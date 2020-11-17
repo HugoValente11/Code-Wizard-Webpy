@@ -10,7 +10,7 @@ from Models.LoginModel import LoginModel
 from Models.PostModel import PostModel
 import os
 web.config.debug = False
-
+    
 urls = (
         '/', 'Home',
         '/register', 'Register',
